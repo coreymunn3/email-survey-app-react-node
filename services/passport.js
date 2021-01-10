@@ -24,6 +24,7 @@ passport.use(
       clientID: GOOGLE_OAUTH_CLIENT_ID,
       clientSecret: GOOGLE_OAUTH_CLIENT_SECRET,
       callbackURL: '/auth/google/callback',
+      proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
       // create a new user in db
