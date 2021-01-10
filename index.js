@@ -2,12 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const keys = require('./config/keys');
 
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
 // connect to DB
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect(keys.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
@@ -20,7 +18,7 @@ app.use(
     // cookie age in MS
     maxAge: 30 * 24 * 60 * 60 * 1000,
     // key to encrypt cookie
-    keys: [process.env.COOKIE_KEY],
+    keys: [keys.COOKIE_KEY],
     name: 'session',
   })
 );

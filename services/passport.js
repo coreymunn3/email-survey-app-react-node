@@ -1,6 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../models/Users');
+const keys = require('../config/keys');
 
 // turn mongoose model instance into a cookie
 passport.serializeUser((user, done) => {
@@ -14,15 +15,12 @@ passport.deserializeUser((id, done) => {
   });
 });
 
-// OAuth Setup
-const GOOGLE_OAUTH_CLIENT_ID = process.env.GOOGLE_OAUTH_CLIENT_ID;
-const GOOGLE_OAUTH_CLIENT_SECRET = process.env.GOOGLE_OAUTH_CLIENT_SECRET;
 // Define strategy
 passport.use(
   new GoogleStrategy(
     {
-      clientID: GOOGLE_OAUTH_CLIENT_ID,
-      clientSecret: GOOGLE_OAUTH_CLIENT_SECRET,
+      clientID: keys.GOOGLE_OAUTH_CLIENT_ID,
+      clientSecret: keys.GOOGLE_OAUTH_CLIENT_SECRET,
       callbackURL: '/auth/google/callback',
       proxy: true,
     },
