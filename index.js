@@ -30,7 +30,7 @@ app.get('/api/currentUser', (req, res) => {
     res.send({ message: 'No User' });
   }
 });
-app.use('/logout', require('./routes/logout'));
+app.use('/api/logout', require('./routes/logout'));
 app.get('/', (req, res) => res.send('Welcome to the App'));
 
 const PORT = process.env.PORT || 5000;

@@ -25,7 +25,6 @@ passport.use(
       proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log('MODEL LOADAED');
       // create a new user in db
       const user = await User.findOne({ googleId: profile.id });
       if (!user) {
