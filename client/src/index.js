@@ -6,6 +6,7 @@ import rootReducer from './reducers';
 import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import App from './App';
+import './index.css';
 
 // redux setup
 const initialState = {};
