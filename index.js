@@ -23,13 +23,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 // routes
 app.use('/auth/google', require('./routes/googleAuth'));
-app.get('/api/currentUser', (req, res) => {
-  if (req.user) {
-    res.send(req.user);
-  } else {
-    res.send({ message: 'No User' });
-  }
-});
+app.use('/api/currentUser', require('./routes/currentUser'));
 app.use('/api/logout', require('./routes/logout'));
 app.get('/', (req, res) => res.send('Welcome to the App'));
 
