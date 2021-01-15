@@ -5,7 +5,7 @@ router.get('/', (req, res) => {
   if (req.user) {
     res.send(req.user);
   } else {
-    res.send({ message: 'No User' });
+    res.send(false);
   }
 });
 

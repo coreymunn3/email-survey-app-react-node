@@ -1,11 +1,11 @@
-import { FETCH_USER } from '../actions/types';
+import { FETCH_USER, LOGOUT } from '../actions/types';
 
-export default (state = {}, action) => {
+export default (state = null, action) => {
   switch (action.type) {
     case FETCH_USER:
-      return {
-        user: action.payload,
-      };
+      return action.payload || false;
+    case LOGOUT:
+      return null;
     default:
       return state;
   }

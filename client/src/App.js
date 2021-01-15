@@ -6,13 +6,13 @@ import { fetchUser } from './actions/authActions';
 // components
 import Header from './components/Header';
 
-const Dashboard = () => <h2>Dashboard</h2>;
+const Surveys = () => <h2>Surveys</h2>;
 const Landing = () => <h2>Landing</h2>;
 const SurveyForm = () => <h2>SurveyForm</h2>;
 
 const App = () => {
   const dispatch = useDispatch();
-  // put user in state
+  // get logged in user
   useEffect(() => {
     dispatch(fetchUser());
   }, []);
@@ -21,7 +21,7 @@ const App = () => {
       <Router>
         <Header />
         <Route exact path='/' component={Landing}></Route>
-        <Route exact path='/surveys' component={Dashboard}></Route>
+        <Route exact path='/surveys' component={Surveys}></Route>
         <Route path='/surveys/new' component={SurveyForm}></Route>
       </Router>
     </div>
