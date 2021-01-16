@@ -13,11 +13,9 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 // state
-import { useSelector, useDispatch } from 'react-redux';
-import { logOut } from '../actions/authActions';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.auth);
   const [anchor, setAnchor] = useState(null);
 
@@ -28,14 +26,6 @@ const Header = () => {
   const handleClose = () => {
     setAnchor(null);
   };
-
-  // const handleLogin = () => {
-  //   history.push('/auth/google');
-  // };
-
-  // const handleLogOut = () => {
-  //   dispatch(logOut());
-  // };
 
   const renderContent = () => {
     switch (user) {
@@ -70,8 +60,14 @@ const Header = () => {
               keepMounted
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem component={Link} to='/api/logout'>
+              <MenuItem component={Link} to='/surveys' onClick={handleClose}>
+                Profile
+              </MenuItem>
+              <MenuItem
+                component={Button}
+                href='/api/logout'
+                style={{ textTransform: 'none' }}
+              >
                 Log Out
               </MenuItem>
             </Menu>

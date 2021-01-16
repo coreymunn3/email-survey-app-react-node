@@ -8,10 +8,3 @@ export const fetchUser = () => async (dispatch) => {
     payload: data,
   });
 };
-
-export const logOut = () => async (dispatch) => {
-  await axios.get('/api/logout');
-  dispatch({
-    type: LOGOUT,
-  });
-};
