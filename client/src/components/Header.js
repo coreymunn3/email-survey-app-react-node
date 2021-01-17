@@ -10,7 +10,7 @@ import {
   Menu,
   MenuItem,
 } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 // state
 import { useSelector } from 'react-redux';
@@ -60,7 +60,7 @@ const Header = () => {
               keepMounted
               onClose={handleClose}
             >
-              <MenuItem component={Link} to='/surveys' onClick={handleClose}>
+              <MenuItem component={Link} to='/profile' onClick={handleClose}>
                 Profile
               </MenuItem>
               <MenuItem
@@ -79,8 +79,13 @@ const Header = () => {
   return (
     <AppBar position='static'>
       <Toolbar>
-        <IconButton color='inherit' edge='start'>
-          <MenuIcon />
+        <IconButton
+          component={Link}
+          to={user ? '/profile' : '/'}
+          color='inherit'
+          edge='start'
+        >
+          <HomeIcon />
         </IconButton>
         <Typography variant='h6' style={{ flexGrow: 1 }}>
           Email Survey App

@@ -5,9 +5,9 @@ import { useDispatch } from 'react-redux';
 import { fetchUser } from './actions/authActions';
 // components
 import Header from './components/Header';
+import Landing from './components/pages/Landing';
+import Profile from './components/pages/Profile';
 
-const Surveys = () => <h2>Surveys</h2>;
-const Landing = () => <h2>Landing</h2>;
 const SurveyForm = () => <h2>SurveyForm</h2>;
 
 const App = () => {
@@ -21,7 +21,7 @@ const App = () => {
       <Router>
         <Header />
         <Route exact path='/' component={Landing}></Route>
-        <Route exact path='/surveys' component={Surveys}></Route>
+        <Route exact path='/profile' component={Profile}></Route>
         <Route path='/surveys/new' component={SurveyForm}></Route>
       </Router>
     </div>
