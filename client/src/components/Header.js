@@ -6,7 +6,6 @@ import {
   IconButton,
   Typography,
   Button,
-  CircularProgress,
   Menu,
   MenuItem,
 } from '@material-ui/core';
@@ -29,8 +28,6 @@ const Header = () => {
 
   const renderContent = () => {
     switch (user) {
-      case null:
-        return <CircularProgress />;
       case false:
         return (
           <Button href='/auth/google' color='inherit'>
