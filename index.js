@@ -23,8 +23,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 // routes
 app.use('/auth/google', require('./routes/googleAuth'));
-app.use('/api/currentUser', require('./routes/currentUser'));
-app.use('/api/logout', require('./routes/logout'));
+app.use('/api/currentuser', require('./routes/currentuser'));
+app.use(
+  '/api/create-checkout-session',
+  require('./routes/createCheckoutSession')
+);
+app.use('/logout', require('./routes/logout'));
 app.get('/', (req, res) => res.send('Welcome to the App'));
 
 const PORT = process.env.PORT || 5000;

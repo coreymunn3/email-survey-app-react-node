@@ -11,6 +11,9 @@ import {
 } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import PersonIcon from '@material-ui/icons/Person';
+import CheckoutButton from './payments/CheckoutButton';
+// import Checkout from './payments/Checkout';
 // state
 import { useSelector } from 'react-redux';
 
@@ -30,13 +33,15 @@ const Header = () => {
     switch (user) {
       case false:
         return (
-          <Button href='/auth/google' color='inherit'>
+          <Button href='/auth/google' color='secondary' variant='contained'>
+            <PersonIcon />
             Login with Google
           </Button>
         );
       default:
         return (
           <Fragment>
+            <CheckoutButton />
             <IconButton
               aria-label='account of current user'
               aria-controls='menu-appbar'
@@ -62,7 +67,7 @@ const Header = () => {
               </MenuItem>
               <MenuItem
                 component={Button}
-                href='/api/logout'
+                href='/logout'
                 style={{ textTransform: 'none' }}
               >
                 Log Out
