@@ -7,6 +7,9 @@ import thunkMiddleware from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import App from './App';
 import './index.css';
+// stripe
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
 
 // redux setup
 const initialState = {};
@@ -16,10 +19,14 @@ const store = createStore(
   initialState,
   composeWithDevTools(applyMiddleware(...middlewares))
 );
+// stripe setup
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Elements stripe={stripePromise}>
+      <App />
+    </Elements>
   </Provider>,
   document.getElementById('root')
 );
