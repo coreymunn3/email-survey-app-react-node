@@ -26,14 +26,19 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       // create a new user in db
+      // console.log(profile);
       const user = await User.findOne({ googleId: profile.id });
       if (!user) {
-        const newUser = new User({ googleId: profile.id });
+        const newUser = new User({
+          googleId: profile.id,
+          displayName: profile.displayName,
+          emailAddress: profile.emails[0].value,
+        });
         await newUser.save();
-        console.log('New User Created');
-        done(null, user);
+        console.log('New User');
+        done(null, newUser);
       } else {
-        console.log('User already exists');
+        console.log('User Exists');
         done(null, user);
       }
     }

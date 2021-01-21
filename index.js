@@ -24,10 +24,11 @@ app.use(passport.session());
 // routes
 app.use('/auth/google', require('./routes/googleAuth'));
 app.use('/api/currentuser', require('./routes/currentuser'));
-app.use(
-  '/api/create-checkout-session',
-  require('./routes/createCheckoutSession')
-);
+app.use('/api/payment', require('./routes/paymentIntent'));
+// app.use(
+//   '/api/create-checkout-session',
+//   require('./routes/createCheckoutSession')
+// );
 app.use('/logout', require('./routes/logout'));
 app.get('/', (req, res) => res.send('Welcome to the App'));
 
