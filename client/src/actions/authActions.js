@@ -8,3 +8,7 @@ export const fetchUser = () => async (dispatch) => {
     payload: data,
   });
 };
+
+// export const handleToken = (token) => async (dispatch) => {
+
+// }

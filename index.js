@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 const connectDB = require('./config/connectDb');
 const keys = require('./config/keys');
 
@@ -9,6 +10,7 @@ const keys = require('./config/keys');
 connectDB(keys.MONGO_URI);
 
 const app = express();
+app.use(bodyParser.json());
 // middlewares
 app.use(
   cookieSession({
@@ -24,11 +26,7 @@ app.use(passport.session());
 // routes
 app.use('/auth/google', require('./routes/googleAuth'));
 app.use('/api/currentuser', require('./routes/currentuser'));
-app.use('/api/payment', require('./routes/paymentIntent'));
-// app.use(
-//   '/api/create-checkout-session',
-//   require('./routes/createCheckoutSession')
-// );
+app.use('/api/stripe', require('./routes/stripe'));
 app.use('/logout', require('./routes/logout'));
 app.get('/', (req, res) => res.send('Welcome to the App'));
 

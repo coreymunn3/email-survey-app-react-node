@@ -40,53 +40,48 @@ const CheckoutButton = () => {
   // form controls
   const [open, setOpen] = useState(false);
   const [credits, setCredits] = useState(5);
-
-  // for stripe
-  // const createCheckoutSession = async () => {
-  //   const { data } = await axios.post('/api/create-checkout-session');
-  //   return data;
-  // };
-
-  // const handleClick = async (e) => {
-  //   const stripe = await loadStripe(process.env.REACT_APP_STRIPE_KEY);
-  //   const { id } = await createCheckoutSession();
-  //   const result = await stripe.redirectToCheckout({
-  //     sessionId: id,
-  //   });
-  // };
-
+  // for modal
   const handleOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };
-
+  // form submit & STRIPE
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // create payment intent
-    const { data } = await axios.get('/api/payment');
+    // create payment intent, get the client secret
+    const { data } = await axios.post('/api/stripe/payment', {
+      email: user.emailAddress,
+      amount: credits * 100,
+    });
     const clientSecret = data.client_secret;
     console.log(data.client_secret);
     // confirm stripe is loaded - from docs
     if (!stripe || !elements) {
       return;
     }
+    // confirm card payment
     const cardElement = elements.getElement(CardElement);
-    const result = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: cardElement,
-        billing_details: {
-          name: 'TEST NAME',
+    const result = await stripe.confirmCardPayment(
+      // pass in client secret and billing deets
+      clientSecret,
+      {
+        payment_method: {
+          card: cardElement,
+          billing_details: {
+            name: user.emailAddress,
+          },
         },
-      },
-    });
+      }
+    );
 
     if (result.error) {
       console.log(result.error);
     } else {
       console.log('Succeeded!');
+      console.log(result);
+      // add 5 credits to user balance
     }
   };
 
