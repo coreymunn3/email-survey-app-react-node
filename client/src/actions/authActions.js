@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, CREATE_CHECKOUT_SESSION } from './types';
+import { FETCH_USER, ADD_CREDITS } from './types';
 
 export const fetchUser = () => async (dispatch) => {
   const { data } = await axios.get('/api/currentuser');
@@ -9,6 +9,9 @@ export const fetchUser = () => async (dispatch) => {
   });
 };
 
-// export const handleToken = (token) => async (dispatch) => {
-
-// }
+export const addCredits = (amount) => async (dispatch) => {
+  dispatch({
+    type: ADD_CREDITS,
+    payload: amount,
+  });
+};

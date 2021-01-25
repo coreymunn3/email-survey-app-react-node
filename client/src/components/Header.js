@@ -12,7 +12,7 @@ import {
 import HomeIcon from '@material-ui/icons/Home';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import PersonIcon from '@material-ui/icons/Person';
-import CheckoutButton from './payments/CheckoutButton';
+import CheckoutButton from './CheckoutButton';
 // state
 import { useSelector } from 'react-redux';
 

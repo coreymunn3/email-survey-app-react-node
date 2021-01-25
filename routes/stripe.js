@@ -4,21 +4,18 @@ const keys = require('../config/keys');
 const Stripe = require('stripe');
 const stripe = Stripe(keys.STRIPE_SECRET_KEY);
 
-router.post('/payment', async (req, res) => {
-  console.log(req.body);
+router.post('/payment_intent', async (req, res) => {
+  const { amount } = req.body;
   try {
     const intent = await stripe.paymentIntents.create({
-      amount: req.body.amount,
+      amount,
       currency: 'usd',
       metadata: { integration_check: 'accept_a_payment' },
     });
-    res.json({ client_secret: intent.client_secret });
+    res.status(200).json({ client_secret: intent.client_secret });
   } catch (error) {
-    res.json({ error });
+    res.status(500).json({ message: error.message });
   }
 });
 
 module.exports = router;
-
-// Useful Strip Documentation here
-// https://stripe.com/docs/payments/payment-intents/migration/charges
