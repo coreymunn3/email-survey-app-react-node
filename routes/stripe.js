@@ -12,7 +12,7 @@ router.post('/payment_intent', async (req, res) => {
       currency: 'usd',
       metadata: { integration_check: 'accept_a_payment' },
     });
-    res.status(200).json({ client_secret: intent.client_secret });
+    res.status(200).json({ clientSecret: intent.client_secret });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

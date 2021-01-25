@@ -59,13 +59,14 @@ const CheckoutModal = ({ modalIsOpen, handleClose }) => {
     setProcessingTo(true);
     try {
       // create payment intent to get the client secret
-      const { data } = await axios.post('/api/stripe/payment_intent', {
+      const {
+        data: { clientSecret },
+      } = await axios.post('/api/stripe/payment_intent', {
         amount: credits * 100,
       });
-      const clientSecret = data.client_secret;
+
       // create & validate a payment method
       const cardElement = elements.getElement(CardElement);
-      console.log(cardElement);
       const paymentMethodReq = await stripe.createPaymentMethod({
         type: 'card',
         card: cardElement,
@@ -75,22 +76,20 @@ const CheckoutModal = ({ modalIsOpen, handleClose }) => {
         setCheckoutError(paymentMethodReq.error.message);
         setProcessingTo(false);
       }
+
       // confirm card payment
       const { paymentIntent, error } = await stripe.confirmCardPayment(
-        // pass in client secret and billing deets
         clientSecret,
         {
           payment_method: paymentMethodReq.paymentMethod.id,
         }
       );
-
+      // handle result
       if (error) {
         setCheckoutError(error.message);
         setProcessingTo(false);
         return;
       } else {
-        console.log('Succeeded!');
-        console.log(paymentIntent);
         // add 5 credits to user balance
         dispatch(addCredits(paymentIntent.amount / 100));
         // end processing and close modal
