@@ -25,7 +25,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 // routes
 app.use('/auth/google', require('./routes/googleAuth'));
-app.use('/api/currentuser', require('./routes/currentuser'));
+app.use('/api/currentuser', require('./routes/currentUser'));
 app.use('/api/stripe', require('./routes/stripe'));
 app.use('/logout', require('./routes/logout'));
 app.get('/', (req, res) => res.send('Welcome to the App'));
