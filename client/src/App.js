@@ -23,7 +23,7 @@ const App = () => {
         <Header />
         <Route exact path='/' component={Landing}></Route>
         <Route exact path='/profile' component={Profile}></Route>
-        <Route path='/newSurvey' component={SurveyForm}></Route>
+        <Route path='/newsurvey' component={SurveyForm}></Route>
       </Router>
     </div>
   );

@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const requireLogin = require('../middlewares/requireLogin');
 
 router.get('/', (req, res) => {
   if (req.user) {
@@ -9,15 +10,11 @@ router.get('/', (req, res) => {
   }
 });
 
-router.post('/addcredits', async (req, res) => {
+router.post('/addcredits', requireLogin, async (req, res) => {
   const { amount } = req.body;
-  if (req.user) {
-    req.user.credits += amount;
-    const user = await req.user.save();
-    res.json(user);
-  } else {
-    res.send(false);
-  }
+  req.user.credits += amount;
+  const user = await req.user.save();
+  res.json(user);
 });
 
 module.exports = router;

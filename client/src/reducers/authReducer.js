@@ -1,6 +1,14 @@
-import { FETCH_USER, ADD_CREDITS } from '../actions/types';
+import { FETCH_USER } from '../actions/types';
 
-export default (state = null, action) => {
+const initialState = {
+  credits: 0,
+  _id: null,
+  googleId: null,
+  displayName: null,
+  emailAddress: null,
+};
+
+export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_USER:
       return action.payload || false;

@@ -8,9 +8,11 @@ import {
   Button,
   Menu,
   MenuItem,
+  Badge,
 } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import PersonIcon from '@material-ui/icons/Person';
 import CheckoutButton from './CheckoutButton';
 // state
@@ -41,8 +43,13 @@ const Header = () => {
         return (
           <Fragment>
             <CheckoutButton />
+            <IconButton aria-label='account balance'>
+              <Badge badgeContent={user.credits} color='secondary'>
+                <AccountBalanceIcon style={{ fill: 'white' }} />
+              </Badge>
+            </IconButton>
             <IconButton
-              aria-label='account of current user'
+              aria-label='user profile'
               aria-controls='menu-appbar'
               aria-haspopup='true'
               color='inherit'
@@ -63,6 +70,9 @@ const Header = () => {
             >
               <MenuItem component={Link} to='/profile' onClick={handleClose}>
                 Profile
+              </MenuItem>
+              <MenuItem component={Link} to='/newsurvey' onClick={handleClose}>
+                New Survey
               </MenuItem>
               <MenuItem
                 component={Button}
@@ -89,7 +99,7 @@ const Header = () => {
           <HomeIcon />
         </IconButton>
         <Typography variant='h6' style={{ flexGrow: 1 }}>
-          Email Survey App
+          Email Surveys
         </Typography>
         {renderContent()}
       </Toolbar>

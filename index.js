@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
@@ -11,7 +12,6 @@ connectDB(keys.MONGO_URI);
 
 const app = express();
 app.use(bodyParser.json());
-// middlewares
 app.use(
   cookieSession({
     // cookie age in MS
@@ -30,6 +30,14 @@ app.use('/api/stripe', require('./routes/stripe'));
 app.use('/logout', require('./routes/logout'));
 app.get('/', (req, res) => res.send('Welcome to the App'));
 
+if (process.env.NODE_ENV === 'production') {
+  // make sure express will serve up prod assets
+  app.use(express.static('/client/build'));
+  // express will serve up index.html file if it doesn't know the route
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT);
