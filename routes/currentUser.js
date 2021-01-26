@@ -4,9 +4,9 @@ const requireLogin = require('../middlewares/requireLogin');
 
 router.get('/', (req, res) => {
   if (req.user) {
-    res.send(req.user);
+    res.json(req.user);
   } else {
-    res.send(false);
+    res.json(false);
   }
 });
 
