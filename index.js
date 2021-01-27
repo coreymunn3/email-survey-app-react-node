@@ -32,7 +32,7 @@ app.use('/logout', require('./routes/logout'));
 
 if (process.env.NODE_ENV === 'production') {
   // make sure express will serve up prod assets
-  app.use(express.static('/client/build'));
+  app.use(express.static(path.join(__dirname, '/client/build')));
   // express will serve up index.html file if it doesn't know the route
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
