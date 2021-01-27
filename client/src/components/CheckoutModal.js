@@ -6,6 +6,7 @@ import {
   Grid,
   MenuItem,
   CircularProgress,
+  Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 // redux
@@ -103,6 +104,9 @@ const CheckoutModal = ({ modalIsOpen, handleClose }) => {
 
   const modalBody = (
     <div className={classes.paper}>
+      <Typography variant='h5' align='center' color='primary' gutterBottom>
+        Add Credits
+      </Typography>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>

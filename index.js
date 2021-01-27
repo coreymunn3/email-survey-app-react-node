@@ -6,6 +6,9 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const connectDB = require('./config/connectDb');
 const keys = require('./config/keys');
+// models
+const User = require('./models/Users');
+const Survey = require('./models/Survey');
 
 // connect to DB
 connectDB(keys.MONGO_URI);
@@ -27,6 +30,7 @@ app.use(passport.session());
 app.use('/auth/google', require('./routes/googleAuth'));
 app.use('/api/currentuser', require('./routes/currentUser'));
 app.use('/api/stripe', require('./routes/stripe'));
+app.use('/api/surveys', require('./routes/surveys'));
 app.use('/logout', require('./routes/logout'));
 // app.get('/', (req, res) => res.send('Welcome to the App'));
 

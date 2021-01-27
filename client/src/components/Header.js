@@ -71,8 +71,8 @@ const Header = () => {
               <MenuItem component={Link} to='/profile' onClick={handleClose}>
                 Profile
               </MenuItem>
-              <MenuItem component={Link} to='/newsurvey' onClick={handleClose}>
-                New Survey
+              <MenuItem component={Link} to='/surveys' onClick={handleClose}>
+                Your Surveys
               </MenuItem>
               <MenuItem
                 component={Button}

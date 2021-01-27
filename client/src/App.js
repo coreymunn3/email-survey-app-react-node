@@ -7,8 +7,8 @@ import { fetchUser } from './actions/authActions';
 import Header from './components/Header';
 import Landing from './components/pages/Landing';
 import Profile from './components/pages/Profile';
-
-const SurveyForm = () => <h2>SurveyForm</h2>;
+import Surveys from './components/pages/Surveys';
+import SurveyForm from './components/pages/SurveyForm';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,9 +21,10 @@ const App = () => {
     <div>
       <Router>
         <Header />
-        <Route exact path='/' component={Landing}></Route>
-        <Route exact path='/profile' component={Profile}></Route>
-        <Route path='/newsurvey' component={SurveyForm}></Route>
+        <Route exact path='/' component={Landing} />
+        <Route exact path='/profile' component={Profile} />
+        <Route exact path='/surveys' component={Surveys} />
+        <Route path='/newsurvey' component={SurveyForm} />
       </Router>
     </div>
   );
