@@ -4,7 +4,7 @@ const passport = require('passport');
 require('../services/passport');
 
 router.get('/callback', passport.authenticate('google'), (req, res) => {
-  res.redirect('/profile');
+  res.redirect('/surveys');
 });
 
 router.get(

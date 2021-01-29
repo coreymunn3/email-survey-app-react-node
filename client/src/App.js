@@ -4,11 +4,11 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchUser } from './actions/authActions';
 // components
-import Header from './components/Header';
-import Landing from './components/pages/Landing';
-import Profile from './components/pages/Profile';
-import Surveys from './components/pages/Surveys';
-import SurveyForm from './components/pages/SurveyForm';
+import Header from './components/navigation/Header';
+import Landing from './components/pages/landing/Landing';
+import Profile from './components/pages/profile/Profile';
+import Surveys from './components/pages/surveys/Surveys';
+import SurveyForm from './components/pages/surveyForm/SurveyForm';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const App = () => {
         <Route exact path='/' component={Landing} />
         <Route exact path='/profile' component={Profile} />
         <Route exact path='/surveys' component={Surveys} />
-        <Route path='/newsurvey' component={SurveyForm} />
+        <Route exact path='/surveys/new' component={SurveyForm} />
       </Router>
     </div>
   );

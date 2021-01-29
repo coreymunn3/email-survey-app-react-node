@@ -11,7 +11,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 // redux
 import { useSelector, useDispatch } from 'react-redux';
-import { addCredits } from '../actions/authActions';
+import { addCredits } from '../../actions/authActions';
 // stripe imports
 import axios from 'axios';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
