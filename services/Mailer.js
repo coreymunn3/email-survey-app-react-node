@@ -1,7 +1,9 @@
 const sg = require('sendgrid');
 const helper = sg.mail;
 const keys = require('../config/keys');
-// sgMail.setApiKey(keys.SENDGRID_KEY);
+
+// Documentation for this method available at
+// https://www.npmjs.com/package/sendgrid
 
 class Mailer extends helper.Mail {
   constructor({ subject, recipients }, template) {
