@@ -58,7 +58,7 @@ const SurveyForm = () => {
           ))}
         </Stepper>
         {
-          // conditionally render step body based on activeStep
+          // conditionally render form step body
           isEndState ? (
             <Confirmation />
           ) : (
@@ -66,7 +66,7 @@ const SurveyForm = () => {
           )
         }
         {
-          // conditionally render buttons based on form step
+          // conditionally render buttons
           // 1 button if in end state, 2 otherwise
           isEndState ? (
             <Container className={classes.buttonGroup}>
