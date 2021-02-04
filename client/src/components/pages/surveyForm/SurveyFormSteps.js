@@ -1,21 +1,18 @@
 import React from 'react';
 import { Container, Grid, TextField } from '@material-ui/core';
+import FIELDS from './formFields';
 
-const SurveyFormSteps = ({ activeStep, formData, setFormData, errors }) => {
-  const isReview = activeStep === 1;
-
-  const FIELDS = [
-    { id: 'title', label: 'Survey Title', multiline: false, rows: 0 },
-    { id: 'subject', label: 'Subject Line', multiline: false, rows: 0 },
-    { id: 'body', label: 'Email Body', multiline: true, rows: 5 },
-    { id: 'recipients', label: 'Recipient List', multiline: true, rows: 1 },
-  ];
+const SurveyFormSteps = ({ isReview, formData, setFormData, errors }) => {
+  const emailFormattingErrorExists = !(
+    typeof errors.recipientsFormatted === 'undefined'
+  );
 
   const handleChange = (e) =>
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
     });
+
   return (
     <Container>
       <Grid container spacing={2}>
@@ -33,6 +30,12 @@ const SurveyFormSteps = ({ activeStep, formData, setFormData, errors }) => {
               InputLabelProps={{ shrink: true }}
               disabled={isReview}
               value={formData[id] || ''}
+              error={id === 'recipients' && emailFormattingErrorExists}
+              helperText={
+                id === 'recipients' && emailFormattingErrorExists
+                  ? errors.recipientsFormatted
+                  : ''
+              }
               onChange={handleChange}
             />
           </Grid>

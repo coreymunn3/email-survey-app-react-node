@@ -13,6 +13,8 @@ import {
 } from '@material-ui/core';
 import Confirmation from './Confirmation';
 import SurveyFormSteps from './SurveyFormSteps';
+// util function
+import validateForm from '../../../utils/validateForm';
 
 const useStyles = makeStyles({
   container: {
@@ -38,29 +40,21 @@ const SurveyForm = () => {
   const steps = ['Create Survey', 'Review & Submit'];
   const [activeStep, setActiveStep] = useState(0);
   const isFirstStep = activeStep === 0;
+  const isReview = activeStep === 1;
   const isEndState = activeStep === steps.length;
   const nextStep = () => setActiveStep((prevStep) => prevStep + 1);
   const backStep = () => setActiveStep((prevStep) => prevStep - 1);
-  // form state
+  // form state & validation
   const [formData, setFormData] = useState({});
-  // form validation
-  const validate = (values) => {
-    const errors = {};
-    if (!values.title) {
-      errors.title = 'You must provide an email title';
+  const errorsExist = Object.keys(validateForm(formData)).length > 0;
+
+  const handleAdvanceStep = () => {
+    if (isReview) {
+      // submit form
+      console.log(formData);
     }
-    if (!values.subject) {
-      errors.subject = 'You must provide an email subject';
-    }
-    if (!values.body) {
-      errors.body = 'You must provide an email body';
-    }
-    if (!values.recipients) {
-      errors.recipients = 'You must provide at least one email recipients';
-    }
-    return errors;
+    nextStep();
   };
-  const errorsExist = Object.keys(validate(formData)).length > 0;
 
   return (
     <Container className={classes.container}>
@@ -86,10 +80,10 @@ const SurveyForm = () => {
             <Confirmation />
           ) : (
             <SurveyFormSteps
-              activeStep={activeStep}
+              isReview={isReview}
               formData={formData}
               setFormData={setFormData}
-              errors={validate(formData)}
+              errors={validateForm(formData)}
             />
           )
         }
@@ -99,6 +93,8 @@ const SurveyForm = () => {
           isEndState ? (
             <Container className={classes.buttonGroup}>
               <Button
+                component={Link}
+                to='/surveys'
                 className={classes.button}
                 variant='contained'
                 color='primary'
@@ -135,7 +131,7 @@ const SurveyForm = () => {
                     variant='contained'
                     color='primary'
                     disabled={errorsExist}
-                    onClick={nextStep}
+                    onClick={handleAdvanceStep}
                     className={classes.button}
                   >
                     {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
