@@ -13,6 +13,9 @@ import {
 } from '@material-ui/core';
 import Confirmation from './Confirmation';
 import SurveyFormSteps from './SurveyFormSteps';
+import { useDispatch } from 'react-redux';
+import { createSurvey } from '../../../actions/surveyActions';
+import { fetchUser } from '../../../actions/authActions';
 // util function
 import validateForm from '../../../utils/validateForm';
 
@@ -36,6 +39,7 @@ const useStyles = makeStyles({
 
 const SurveyForm = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   // stepper
   const steps = ['Create Survey', 'Review & Submit'];
   const [activeStep, setActiveStep] = useState(0);
@@ -52,6 +56,7 @@ const SurveyForm = () => {
     if (isReview) {
       // submit form
       console.log(formData);
+      dispatch(createSurvey(formData));
     }
     nextStep();
   };

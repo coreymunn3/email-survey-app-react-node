@@ -27,10 +27,10 @@ router.post('/', requireLogin, requireCredits, async (req, res) => {
     // save the survey
     await survey.save();
     // subtract credits from user
-    req.user.credits = -1;
-    const updatedUser = await req.user.save();
-    // send back user
-    res.json(updatedUser);
+    req.user.credits -= 1;
+    await req.user.save();
+    // send back survey
+    res.json(survey);
   } catch (error) {
     res.status(422).json(err);
   }
