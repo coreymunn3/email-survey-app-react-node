@@ -6,7 +6,11 @@ const Survey = require('../models/Survey');
 const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 
-router.get('/feedback', (req, res) => res.send('Thanks for your Feedback!'));
+router.get('/', async (req, res) => {
+  // query mongo for survey documents where user id is _user
+  // res.json that data
+  res.send('Implement This');
+});
 
 router.post('/', requireLogin, requireCredits, async (req, res) => {
   // construct the survey
@@ -32,7 +36,7 @@ router.post('/', requireLogin, requireCredits, async (req, res) => {
     // send back survey
     res.json(survey);
   } catch (error) {
-    res.status(422).json(err);
+    res.status(422).json(error);
   }
 });
 

@@ -15,7 +15,6 @@ import Confirmation from './Confirmation';
 import SurveyFormSteps from './SurveyFormSteps';
 import { useDispatch } from 'react-redux';
 import { createSurvey } from '../../../actions/surveyActions';
-import { fetchUser } from '../../../actions/authActions';
 // util function
 import validateForm from '../../../utils/validateForm';
 
@@ -51,7 +50,7 @@ const SurveyForm = () => {
   // form state & validation
   const [formData, setFormData] = useState({});
   const errorsExist = Object.keys(validateForm(formData)).length > 0;
-
+  // advance or submit the form
   const handleAdvanceStep = () => {
     if (isReview) {
       // submit form

@@ -1,10 +1,33 @@
 import React from 'react';
-import { Container, Typography } from '@material-ui/core';
+import { Container, Typography, CircularProgress } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { useSelector } from 'react-redux';
+
+const useStyles = makeStyles({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '40vh',
+  },
+});
 
 const Confirmation = () => {
+  const { loading, error } = useSelector((state) => state.surveys);
+  const classes = useStyles();
+  const success = !loading && !error;
+  const failure = !loading && error;
   return (
-    <Container>
-      <Typography>This is Confirmation</Typography>
+    <Container className={classes.root}>
+      {loading && <CircularProgress size={100} />}
+      {success && (
+        <Typography variant='h4'>Thank you for Using our Serivce!</Typography>
+      )}
+      {failure && (
+        <Typography variant='h4' color='secondary'>
+          Request Failed, Please try again.
+        </Typography>
+      )}
     </Container>
   );
 };
