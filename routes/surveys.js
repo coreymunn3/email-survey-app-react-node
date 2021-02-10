@@ -1,11 +1,11 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const router = express.Router();
 const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
 const Survey = require('../models/Survey');
 const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
-const _ = require('lodash');
 const { Path } = require('path-parser');
 const { URL } = require('url');
 
@@ -50,27 +50,42 @@ router.get('/feedback', (req, res) => {
 });
 
 router.post('/webhooks', (req, res) => {
+  // define path params from pathname
+  const p = new Path('/api/surveys/:surveyId/:choice');
   // map over body of request to pull out meaningful survey data
-  const events = _.map(req.body, ({ email, url }) => {
-    if (url) {
-      // extract pathname from url in webhook event
-      const pathname = new URL(url).pathname;
-      // extract path params from pathname
-      const p = new Path('/api/surveys/:surveyId/:choice');
-      const match = p.test(pathname);
-      if (match) {
-        return {
-          ...match,
-          email,
-        };
+  const events = req.body
+    .map(({ email, url }) => {
+      if (url) {
+        // extract pathname from url in webhook event & match
+        const match = p.test(new URL(url).pathname);
+        if (match) {
+          return {
+            ...match,
+            email,
+          };
+        }
       }
-    }
+    })
+    // remove undefined events
+    .filter((event) => event !== undefined);
+  // console.log(events);
+
+  // update in MongoDB
+  events.forEach(({ surveyId, choice, email }) => {
+    Survey.updateOne(
+      {
+        _id: surveyId,
+        recipients: {
+          $elemMatch: { email: email, responded: false },
+        },
+      },
+      {
+        $inc: { [choice]: 1 },
+        $set: { 'recipients.$.responded': true },
+      }
+    ).exec();
   });
-  // remove non-click events
-  const compactEvents = _.compact(events);
-  // remove duplicate events
-  const uniqueEvents = _.uniqBy(compactEvents, 'email', 'surveyId');
-  console.log(uniqueEvents);
+
   // respond
   res.send({});
 });
