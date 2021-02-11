@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 // state
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from './actions/authActions';
+import { fetchSurveys } from './actions/surveyActions';
 // components
 import Header from './components/navigation/Header';
 import Landing from './components/pages/landing/Landing';
@@ -12,10 +13,17 @@ import SurveyForm from './components/pages/surveyForm/SurveyForm';
 
 const App = () => {
   const dispatch = useDispatch();
+
   // get logged in user
   useEffect(() => {
     dispatch(fetchUser());
+    dispatch(fetchSurveys());
   }, []);
+  // get surveys when user is loaded
+  // const auth = useSelector((state) => state.auth);
+  // useEffect(() => {
+
+  // }, [auth]);
 
   return (
     <div>

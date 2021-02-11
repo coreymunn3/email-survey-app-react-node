@@ -9,10 +9,16 @@ const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
 const { Path } = require('path-parser');
 const { URL } = require('url');
 
-router.get('/', async (req, res) => {
-  // query mongo for survey documents where user id is _user
-  // res.json that data
-  res.send('Implement This');
+router.get('/', requireLogin, async (req, res) => {
+  try {
+    const userSurveys = await Survey.find(
+      { _user: req.user },
+      { recipients: 0 }
+    );
+    res.status(200).json(userSurveys);
+  } catch (error) {
+    res.status(404);
+  }
 });
 
 router.post('/', requireLogin, requireCredits, async (req, res) => {
@@ -45,7 +51,7 @@ router.post('/', requireLogin, requireCredits, async (req, res) => {
 
 // For Sendgrid, displayed when user responds to an email.
 // remove later
-router.get('/feedback', (req, res) => {
+router.get('/:surveyId/:choice', (req, res) => {
   res.send('Thanks for Voting! Your response has been recorded.');
 });
 
@@ -82,6 +88,7 @@ router.post('/webhooks', (req, res) => {
       {
         $inc: { [choice]: 1 },
         $set: { 'recipients.$.responded': true },
+        lastResponded: new Date(),
       }
     ).exec();
   });

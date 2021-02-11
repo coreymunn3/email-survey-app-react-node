@@ -1,10 +1,15 @@
 import axios from 'axios';
 import { fetchUser } from './authActions';
-import { CREATE_SURVEY, SET_LOADING, SURVEY_ERROR } from './types';
+import {
+  CREATE_SURVEY,
+  FETCH_SURVEY,
+  SURVEY_LOADING,
+  SURVEY_ERROR,
+} from './types';
 
 export const setLoading = () => (dispatch) => {
   dispatch({
-    type: SET_LOADING,
+    type: SURVEY_LOADING,
   });
 };
 
@@ -30,4 +35,15 @@ export const createSurvey = (formData) => async (dispatch) => {
   dispatch(fetchUser());
 };
 
-// export const fetchSurveys = () => async (dispatch) => {}
+export const fetchSurveys = () => async (dispatch) => {
+  dispatch(setLoading());
+  try {
+    const { data } = await axios.get('/api/surveys');
+    dispatch({
+      type: FETCH_SURVEY,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch(setError(error));
+  }
+};
