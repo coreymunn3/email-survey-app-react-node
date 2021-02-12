@@ -1,7 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Fab, Tooltip } from '@material-ui/core';
+import {
+  Container,
+  Fab,
+  Tooltip,
+  Typography,
+  Divider,
+} from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import SurveyList from './SurveyList';
 
@@ -12,24 +18,35 @@ const useStyles = makeStyles((theme) => ({
     bottom: theme.spacing(2),
     right: theme.spacing(2),
   },
+  boxSpacing: {
+    padding: '2rem 0',
+  },
+  clearBottom: {
+    marginBottom: '2rem',
+  },
 }));
 
 const Surveys = () => {
   const classes = useStyles();
   return (
     <Container>
-      <h1>Your Surveys</h1>
-      <SurveyList />
-      <Tooltip title='New Survey' aria-label='add'>
-        <Fab
-          component={Link}
-          to='/surveys/new'
-          color='secondary'
-          className={classes.fab}
-        >
-          <AddIcon />
-        </Fab>
-      </Tooltip>
+      <div className={classes.boxSpacing}>
+        <Typography variant='h4' gutterBottom>
+          Your Surveys
+        </Typography>
+        <Divider className={classes.clearBottom} />
+        <SurveyList />
+        <Tooltip title='New Survey' aria-label='add'>
+          <Fab
+            component={Link}
+            to='/surveys/new'
+            color='secondary'
+            className={classes.fab}
+          >
+            <AddIcon />
+          </Fab>
+        </Tooltip>
+      </div>
     </Container>
   );
 };
