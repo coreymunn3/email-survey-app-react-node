@@ -10,29 +10,24 @@ import Landing from './components/pages/landing/Landing';
 import Profile from './components/pages/profile/Profile';
 import Surveys from './components/pages/surveys/Surveys';
 import SurveyForm from './components/pages/surveyForm/SurveyForm';
+import PrivateRoute from './components/navigation/PrivateRoute';
 
 const App = () => {
   const dispatch = useDispatch();
-
+  const auth = useSelector((state) => state.auth);
   // get logged in user
   useEffect(() => {
     dispatch(fetchUser());
-    dispatch(fetchSurveys());
   }, []);
-  // get surveys when user is loaded
-  // const auth = useSelector((state) => state.auth);
-  // useEffect(() => {
-
-  // }, [auth]);
 
   return (
     <div>
       <Router>
         <Header />
         <Route exact path='/' component={Landing} />
-        <Route exact path='/profile' component={Profile} />
-        <Route exact path='/surveys' component={Surveys} />
-        <Route exact path='/surveys/new' component={SurveyForm} />
+        <PrivateRoute exact path='/profile' component={Profile} />
+        <PrivateRoute exact path='/surveys' component={Surveys} />
+        <PrivateRoute exact path='/surveys/new' component={SurveyForm} />
       </Router>
     </div>
   );

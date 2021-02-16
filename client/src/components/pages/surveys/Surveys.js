@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -10,6 +10,8 @@ import {
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import SurveyList from './SurveyList';
+import { useDispatch } from 'react-redux';
+import { fetchSurveys } from '../../../actions/surveyActions';
 
 // styles from: https://stackoverflow.com/questions/35828991/make-material-ui-reactjs-floatingactionbutton-float
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +30,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Surveys = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchSurveys());
+  }, []);
+
   return (
     <Container>
       <div className={classes.boxSpacing}>
