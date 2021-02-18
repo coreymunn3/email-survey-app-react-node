@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Grid,
@@ -6,7 +7,11 @@ import {
   CardContent,
   CardActions,
   Typography,
+  Chip,
+  Button,
 } from '@material-ui/core';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 
 const useStyles = makeStyles({
   card: {
@@ -17,6 +22,11 @@ const useStyles = makeStyles({
   },
   cardFooter: {
     backgroundColor: '#f6f6f6',
+    padding: '0',
+    height: '50px',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
   },
 });
 
@@ -29,16 +39,27 @@ const SurveyListItem = ({ survey }) => {
           <Typography variant='h5' color='primary' gutterBottom>
             {survey.title}
           </Typography>
+          <Chip
+            style={{ marginRight: '15px' }}
+            avatar={<ThumbUpIcon />}
+            label={`Yes: ${survey.yes}`}
+            color='primary'
+          />
+          <Chip
+            avatar={<ThumbDownIcon />}
+            label={`No: ${survey.no}`}
+            color='secondary'
+          />
           <Typography variant='subtitle1'>Subject: {survey.subject}</Typography>
-          <Typography variant='subtitle1'>Body:</Typography>
-          <Typography>{survey.body}</Typography>
           <Typography color='textSecondary' variant='body2'>
             {'Sent On '}
             {new Date(survey.dateSent).toLocaleDateString()}
           </Typography>
         </CardContent>
         <CardActions className={classes.cardFooter}>
-          <Typography>Yes and No</Typography>
+          <Button component={Link} to={`/surveys/${survey._id}`}>
+            View Detail
+          </Button>
         </CardActions>
       </Card>
     </Grid>

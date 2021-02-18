@@ -1,8 +1,10 @@
+import { setRef } from '@material-ui/core';
 import axios from 'axios';
 import { fetchUser } from './authActions';
 import {
   CREATE_SURVEY,
-  FETCH_SURVEY,
+  FETCH_SURVEYS,
+  FETCH_CURRENT_SURVEY,
   SURVEY_LOADING,
   SURVEY_ERROR,
 } from './types';
@@ -40,7 +42,20 @@ export const fetchSurveys = () => async (dispatch) => {
   try {
     const { data } = await axios.get('/api/surveys');
     dispatch({
-      type: FETCH_SURVEY,
+      type: FETCH_SURVEYS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch(setError(error));
+  }
+};
+
+export const fetchCurrentSurvey = (id) => async (dispatch) => {
+  dispatch(setLoading());
+  try {
+    const { data } = await axios.get(`/api/surveys/${id}`);
+    dispatch({
+      type: FETCH_CURRENT_SURVEY,
       payload: data,
     });
   } catch (error) {

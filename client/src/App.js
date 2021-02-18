@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 // state
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from './actions/authActions';
-import { fetchSurveys } from './actions/surveyActions';
 // components
 import Header from './components/navigation/Header';
 import Landing from './components/pages/landing/Landing';
 import Profile from './components/pages/profile/Profile';
 import Surveys from './components/pages/surveys/Surveys';
 import SurveyForm from './components/pages/surveyForm/SurveyForm';
+import SurveyDetail from './components/pages/surveys/SurveyDetail';
 import PrivateRoute from './components/navigation/PrivateRoute';
 
 const App = () => {
@@ -27,6 +27,7 @@ const App = () => {
         <Route exact path='/' component={Landing} />
         <PrivateRoute exact path='/profile' component={Profile} />
         <PrivateRoute exact path='/surveys' component={Surveys} />
+        <PrivateRoute path='/surveys/:id' component={SurveyDetail} />
         <PrivateRoute exact path='/surveys/new' component={SurveyForm} />
       </Router>
     </div>

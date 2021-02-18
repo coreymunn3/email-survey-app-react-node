@@ -97,4 +97,15 @@ router.post('/webhooks', (req, res) => {
   res.send({});
 });
 
+router.get('/:surveyId', async (req, res) => {
+  const id = req.params.surveyId;
+  try {
+    const survey = await Survey.findOne({ _id: id }).exec();
+    res.json(survey);
+  } catch (error) {
+    console.log(error);
+    res.status(404);
+  }
+});
+
 module.exports = router;

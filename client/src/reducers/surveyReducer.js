@@ -1,12 +1,14 @@
 import {
   CREATE_SURVEY,
-  FETCH_SURVEY,
+  FETCH_SURVEYS,
+  FETCH_CURRENT_SURVEY,
   SURVEY_LOADING,
   SURVEY_ERROR,
 } from '../actions/types';
 
 const initialState = {
   surveys: [],
+  current: null,
   loading: false,
   error: null,
 };
@@ -30,10 +32,16 @@ export default (state = initialState, action) => {
         surveys: [...state.surveys, action.payload],
         loading: false,
       };
-    case FETCH_SURVEY:
+    case FETCH_SURVEYS:
       return {
         ...state,
         surveys: action.payload,
+        loading: false,
+      };
+    case FETCH_CURRENT_SURVEY:
+      return {
+        ...state,
+        current: action.payload,
         loading: false,
       };
     default:
