@@ -1,4 +1,3 @@
-import { setRef } from '@material-ui/core';
 import axios from 'axios';
 import { fetchUser } from './authActions';
 import {

@@ -8,7 +8,14 @@ import {
 
 const initialState = {
   surveys: [],
-  current: null,
+  current: {
+    yes: 0,
+    no: 0,
+    title: null,
+    subject: null,
+    body: null,
+    recipients: [],
+  },
   loading: false,
   error: null,
 };

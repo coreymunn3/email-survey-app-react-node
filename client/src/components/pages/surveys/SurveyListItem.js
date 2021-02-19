@@ -39,18 +39,15 @@ const SurveyListItem = ({ survey }) => {
           <Typography variant='h5' color='primary' gutterBottom>
             {survey.title}
           </Typography>
+          <Typography variant='subtitle1'>Subject: {survey.subject}</Typography>
           <Chip
             style={{ marginRight: '15px' }}
             avatar={<ThumbUpIcon />}
             label={`Yes: ${survey.yes}`}
             color='primary'
           />
-          <Chip
-            avatar={<ThumbDownIcon />}
-            label={`No: ${survey.no}`}
-            color='secondary'
-          />
-          <Typography variant='subtitle1'>Subject: {survey.subject}</Typography>
+          <Chip avatar={<ThumbDownIcon />} label={`No: ${survey.no}`} />
+
           <Typography color='textSecondary' variant='body2'>
             {'Sent On '}
             {new Date(survey.dateSent).toLocaleDateString()}
