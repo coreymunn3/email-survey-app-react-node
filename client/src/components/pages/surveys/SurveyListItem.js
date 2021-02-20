@@ -54,7 +54,7 @@ const SurveyListItem = ({ survey }) => {
           </Typography>
         </CardContent>
         <CardActions className={classes.cardFooter}>
-          <Button component={Link} to={`/surveys/${survey._id}`}>
+          <Button component={Link} to={`/surveys/survey/${survey._id}`}>
             View Detail
           </Button>
         </CardActions>
