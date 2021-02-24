@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import React, { useEffect, Fragment } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // state
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from './actions/authActions';
@@ -22,11 +22,15 @@ const App = () => {
   return (
     <div>
       <Router>
-        <Header />
-        <Route exact path='/' component={Landing} />
-        <PrivateRoute exact path='/surveys' component={Surveys} />
-        <PrivateRoute path='/surveys/survey/:id' component={SurveyDetail} />
-        <PrivateRoute exact path='/surveys/new' component={SurveyForm} />
+        <Switch>
+          <Route exact path='/' component={Landing} />
+          <Fragment>
+            <Header />
+            <PrivateRoute exact path='/surveys' component={Surveys} />
+            <PrivateRoute path='/surveys/survey/:id' component={SurveyDetail} />
+            <PrivateRoute exact path='/surveys/new' component={SurveyForm} />
+          </Fragment>
+        </Switch>
       </Router>
     </div>
   );
