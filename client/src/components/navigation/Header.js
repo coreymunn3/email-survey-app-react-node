@@ -68,9 +68,6 @@ const Header = () => {
               keepMounted
               onClose={handleClose}
             >
-              <MenuItem component={Link} to='/profile' onClick={handleClose}>
-                Profile
-              </MenuItem>
               <MenuItem component={Link} to='/surveys' onClick={handleClose}>
                 Your Surveys
               </MenuItem>
@@ -92,7 +89,7 @@ const Header = () => {
       <Toolbar>
         <IconButton
           component={Link}
-          to={user ? '/profile' : '/'}
+          to={user ? '/surveys' : '/'}
           color='inherit'
           edge='start'
         >
