@@ -12,7 +12,14 @@ import {
   TableRow,
   TableCell,
 } from '@material-ui/core';
-import { BarChart, XAxis, YAxis, Bar, ResponsiveContainer } from 'recharts';
+import {
+  BarChart,
+  XAxis,
+  YAxis,
+  Bar,
+  ResponsiveContainer,
+  Tooltip,
+} from 'recharts';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrentSurvey } from '../../../actions/surveyActions';
 
@@ -44,7 +51,10 @@ const SurveyDetail = ({
   const { loading, current } = useSelector((state) => state.surveys);
   const classes = useStyles();
 
-  const sampleData = { name: 'response', yes: 100, no: 50 };
+  const chartData = [
+    { response: 'Yes', value: current.yes },
+    { response: 'No', value: current.no },
+  ];
 
   return (
     <Container>
@@ -65,14 +75,16 @@ const SurveyDetail = ({
           <Typography>Body: {current.body}</Typography>
           <br></br>
           <Typography variant='h5'>Result</Typography>
-          {/* <ResponsiveContainer width='100%' height='200px'>
-            <BarChart data={sampleData} width={100} height={100}>
-              <XAxis />
-              <YAxis />
-              <Bar dataKey='yes' />
-              <Bar dataKey='No' />
-            </BarChart>
-          </ResponsiveContainer> */}
+          <div>
+            <ResponsiveContainer width='75%' height={200}>
+              <BarChart data={chartData}>
+                <XAxis dataKey='response' />
+                <YAxis />
+                <Tooltip />
+                <Bar dataKey='value' fill='#3f51b5' />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
           <Typography variant='h5'>Responses</Typography>
           <TableContainer>
             <Table>
