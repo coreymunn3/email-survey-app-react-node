@@ -2,6 +2,7 @@ import React from 'react';
 import Hero from './Hero';
 import StickyNav from './StickyNav';
 import Benefits from './Benefits';
+import HowItWorks from './HowItWorks';
 
 const Landing = () => {
   return (
@@ -13,6 +14,7 @@ const Landing = () => {
       {/* Benefits with Icons section */}
       <Benefits />
       {/* How it works section w/3 steps */}
+      <HowItWorks />
       {/* Pricing Table - 3 cards */}
       {/* Call to Action - Get Started */}
       {/* Footer */}

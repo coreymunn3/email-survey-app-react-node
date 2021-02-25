@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import HeroImage from './HeroImage.jpg';
+import HeroImage from './img/HeroImage.jpg';
 
 const useStyles = makeStyles({
   hero: {
@@ -45,7 +45,7 @@ const Hero = () => {
   const classes = useStyles();
   return (
     <section className={classes.hero}>
-      <div maxWidth='xs' className={classes.overlay}>
+      <div maxwidth='xs' className={classes.overlay}>
         <Container maxWidth='xs' className={classes.overlayTitle}>
           <Typography variant='h3' align='center'>
             Email Surveys

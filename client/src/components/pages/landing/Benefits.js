@@ -6,6 +6,11 @@ import MoneyOffIcon from '@material-ui/icons/MoneyOff';
 import { Grid, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
+  root: {
+    marginBottom: '50px',
+    maxWidth: '1200px',
+    margin: 'auto',
+  },
   benefitsContainer: {
     display: 'flex',
     flexDirection: 'row',
@@ -18,7 +23,7 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '1rem 3rem',
+    padding: '2rem 3rem',
   },
   benefitIcon: {
     margin: '20px 0',
@@ -28,7 +33,7 @@ const useStyles = makeStyles({
 const Benefits = () => {
   const classes = useStyles();
   return (
-    <section>
+    <section className={classes.root}>
       <Grid container className={classes.benefitsContainer}>
         <Grid item sm={12} md={3} className={classes.benefitItem}>
           <VerifiedUserIcon
