@@ -1,7 +1,7 @@
 import React from 'react';
 // theme: https://material-ui.com/styles/api/
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import { Grid, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 // images
 import CreditCard from './img/CreditCard.jpg';
 import FilloutForm from './img/FilloutForm.jpg';
