@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
@@ -30,51 +30,22 @@ const useStyles = makeStyles({
   },
 });
 
-const Benefits = () => {
+const Benefits = ({ benefits }) => {
   const classes = useStyles();
   return (
     <section className={classes.root}>
       <Grid container className={classes.benefitsContainer}>
-        <Grid item sm={12} md={3} className={classes.benefitItem}>
-          <VerifiedUserIcon
-            color='primary'
-            fontSize='large'
-            className={classes.benefitIcon}
-          />
-          <Typography variant='h6' align='center' gutterBottom>
-            Secure
-          </Typography>
-          <Typography variant='body2' align='center'>
-            Your Data is kept private, where only you can view it.
-          </Typography>
-        </Grid>
-        <Grid item sm={12} md={3} className={classes.benefitItem}>
-          <DirectionsRunIcon
-            color='primary'
-            fontSize='large'
-            className={classes.benefitIcon}
-          />
-          <Typography variant='h6' align='center' gutterBottom>
-            Fast
-          </Typography>
-          <Typography variant='body2' align='center'>
-            Sending out emails to thousands of recipients takes only a few
-            seconds
-          </Typography>
-        </Grid>
-        <Grid item sm={12} md={3} className={classes.benefitItem}>
-          <MoneyOffIcon
-            color='primary'
-            fontSize='large'
-            className={classes.benefitIcon}
-          />
-          <Typography variant='h6' align='center' gutterBottom>
-            Cheap
-          </Typography>
-          <Typography variant='body2' align='center'>
-            Only $1 to send out a survey, to whover you want
-          </Typography>
-        </Grid>
+        {benefits.map((benefit, idx) => (
+          <Grid key={idx} item sm={12} md={3} className={classes.benefitItem}>
+            <Fragment>{benefit.icon}</Fragment>
+            <Typography variant='h6' align='center' gutterBottom>
+              {benefit.name}
+            </Typography>
+            <Typography variant='body2' align='center'>
+              {benefit.description}
+            </Typography>
+          </Grid>
+        ))}
       </Grid>
     </section>
   );

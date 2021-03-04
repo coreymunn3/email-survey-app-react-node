@@ -7,7 +7,6 @@ import {
   TableBody,
   TableCell,
   TableRow,
-  TableHead,
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) =>
