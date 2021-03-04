@@ -69,6 +69,8 @@ const navItemVariants = {
 const StickyNav = () => {
   // find scroll position
   const [scrollPos, setScrollPos] = useState(0);
+  // set desired transition position
+  const transitionAt = 50;
   const handleScroll = () => {
     setScrollPos(window.pageYOffset);
   };
@@ -83,7 +85,9 @@ const StickyNav = () => {
     <nav
       aria-roledescription='navigation'
       className={
-        scrollPos > 650 ? classes.navbarSolid : classes.navbarTransparent
+        scrollPos > transitionAt
+          ? classes.navbarSolid
+          : classes.navbarTransparent
       }
     >
       <motion.div
