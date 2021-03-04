@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { motion } from 'framer-motion';
 import HeroImage from './img/HeroImage.jpg';
 
 const useStyles = makeStyles({
@@ -41,12 +42,47 @@ const useStyles = makeStyles({
   },
 });
 
+// variants for framer motion animation
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+    y: -40,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: 0.5,
+      duration: 0.5,
+    },
+  },
+};
+
+const buttonVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      delay: 1,
+    },
+  },
+};
+
 const Hero = () => {
   const classes = useStyles();
   return (
     <section className={classes.hero}>
       <div maxwidth='xs' className={classes.overlay}>
-        <Container maxWidth='xs' className={classes.overlayTitle}>
+        <Container
+          component={motion.div}
+          variants={containerVariants}
+          initial='hidden'
+          animate='visible'
+          maxWidth='xs'
+          className={classes.overlayTitle}
+        >
           <Typography variant='h3' align='center'>
             Email Surveys
           </Typography>
@@ -55,7 +91,14 @@ const Hero = () => {
             customers think? We just might have exactly what you need.
           </Typography>
         </Container>
-        <Container maxWidth='xs' className={classes.buttonContainer}>
+        <Container
+          component={motion.div}
+          variants={buttonVariants}
+          initial='hidden'
+          animate='visible'
+          maxWidth='xs'
+          className={classes.buttonContainer}
+        >
           <Button
             variant='contained'
             color='primary'

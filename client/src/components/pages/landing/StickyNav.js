@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
+import { motion } from 'framer-motion';
 
 const useStyles = makeStyles({
   navbarTransparent: {
@@ -40,6 +41,31 @@ const useStyles = makeStyles({
   },
 });
 
+const navVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      when: 'beforeChildren',
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const navItemVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
 const StickyNav = () => {
   // find scroll position
   const [scrollPos, setScrollPos] = useState(0);
@@ -60,15 +86,58 @@ const StickyNav = () => {
         scrollPos > 650 ? classes.navbarSolid : classes.navbarTransparent
       }
     >
-      <div className={classes.navGroup}>
-        <Typography className={classes.navItem}>Home</Typography>
-        <Typography className={classes.navItem}>About</Typography>
-        <Typography className={classes.navItem}>Contact</Typography>
-      </div>
-      <div className={classes.navGroup}>
-        <Typography className={classes.navItem}>How it Works</Typography>
-        <Typography className={classes.navItem}>Pricing</Typography>
-      </div>
+      <motion.div
+        variants={navVariants}
+        initial='hidden'
+        animate='visible'
+        className={classes.navGroup}
+      >
+        <Typography
+          component={motion.h6}
+          variants={navItemVariants}
+          initial='hidden'
+          visible='animate'
+          className={classes.navItem}
+        >
+          Home
+        </Typography>
+        <Typography
+          component={motion.h6}
+          variants={navItemVariants}
+          initial='hidden'
+          visible='animate'
+          className={classes.navItem}
+        >
+          About
+        </Typography>
+        <Typography
+          component={motion.h6}
+          variants={navItemVariants}
+          initial='hidden'
+          visible='animate'
+          className={classes.navItem}
+        >
+          Contact
+        </Typography>
+        <Typography
+          component={motion.h6}
+          variants={navItemVariants}
+          initial='hidden'
+          visible='animate'
+          className={classes.navItem}
+        >
+          How it Works
+        </Typography>
+        <Typography
+          component={motion.h6}
+          variants={navItemVariants}
+          initial='hidden'
+          visible='animate'
+          className={classes.navItem}
+        >
+          Pricing
+        </Typography>
+      </motion.div>
     </nav>
   );
 };
