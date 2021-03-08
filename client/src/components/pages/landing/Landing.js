@@ -4,10 +4,15 @@ import StickyNav from './StickyNav';
 import Benefits from './Benefits';
 import HowItWorks from './HowItWorks';
 import PricingTable from './PricingTable';
+import CallToAction from './CallToAction';
 
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import DirectionsRunIcon from '@material-ui/icons/DirectionsRun';
 import MoneyOffIcon from '@material-ui/icons/MoneyOff';
+// images
+import CreditCard from './img/CreditCard.jpg';
+import FilloutForm from './img/FilloutForm.jpg';
+import YesNo from './img/YesNo.jpg';
 
 const Landing = () => {
   const benefits = [
@@ -60,6 +65,35 @@ const Landing = () => {
       },
     },
   ];
+  const howItWorks = [
+    {
+      number: 1,
+      image: CreditCard,
+      content: {
+        title: 'Purchase Credits',
+        description:
+          '5 Dollars for 5 Credits, and sending out a survey starts at only 1 Credit. Purchases are routed securely through Stripe, so we never save your card information.',
+      },
+    },
+    {
+      number: 2,
+      image: FilloutForm,
+      content: {
+        title: 'Create Your Survey',
+        description:
+          'Using a simple form, create a Yes/No survey with a Title, Subject, and Body. List the recipients, and our email engine does the rest!',
+      },
+    },
+    {
+      number: 3,
+      image: YesNo,
+      content: {
+        title: 'Monitor Responses In A Real Time Dashbaord',
+        description:
+          'Your Recipients can Respond via Links provided in the Email. Using a Webhook, We Record Those Responses in Real Time.',
+      },
+    },
+  ];
 
   return (
     <Fragment>
@@ -70,10 +104,11 @@ const Landing = () => {
       {/* Benefits with Icons section */}
       <Benefits benefits={benefits} />
       {/* How it works section w/3 steps */}
-      <HowItWorks />
+      <HowItWorks howItWorks={howItWorks} />
       {/* Pricing Table - 3 cards */}
       <PricingTable pricingOptions={pricingOptions} />
       {/* Call to Action - Get Started */}
+      <CallToAction />
       {/* Footer */}
     </Fragment>
   );

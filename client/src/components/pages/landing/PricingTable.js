@@ -12,12 +12,12 @@ import {
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
-      marginBottom: '50px',
+      padding: '3rem 0',
       maxWidth: '1200px',
       margin: 'auto',
     },
     pricingTable: {
-      padding: '2rem',
+      padding: '1.5rem',
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'center',
@@ -55,7 +55,10 @@ const PricingTable = ({ pricingOptions }) => {
   return (
     <section className={classes.root}>
       <Typography variant='h6' gutterBottom align='center'>
-        Pricing Options to Get Started
+        Pricing
+      </Typography>
+      <Typography variant='body2' align='center'>
+        No Matter Who You Are, We Got You Covered
       </Typography>
       <div className={classes.pricingTable}>
         {pricingOptions.map(({ title, description, benefitsTable }, idx) => (

@@ -67,6 +67,7 @@ const navItemVariants = {
 };
 
 const StickyNav = () => {
+  const classes = useStyles();
   // find scroll position
   const [scrollPos, setScrollPos] = useState(0);
   // set desired transition position
@@ -80,7 +81,8 @@ const StickyNav = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  const classes = useStyles();
+
+  const navLinks = ['Home', 'About', 'How To', 'Pricing', 'Contact'];
   return (
     <nav
       aria-roledescription='navigation'
@@ -96,51 +98,18 @@ const StickyNav = () => {
         animate='visible'
         className={classes.navGroup}
       >
-        <Typography
-          component={motion.h6}
-          variants={navItemVariants}
-          initial='hidden'
-          visible='animate'
-          className={classes.navItem}
-        >
-          Home
-        </Typography>
-        <Typography
-          component={motion.h6}
-          variants={navItemVariants}
-          initial='hidden'
-          visible='animate'
-          className={classes.navItem}
-        >
-          About
-        </Typography>
-        <Typography
-          component={motion.h6}
-          variants={navItemVariants}
-          initial='hidden'
-          visible='animate'
-          className={classes.navItem}
-        >
-          Contact
-        </Typography>
-        <Typography
-          component={motion.h6}
-          variants={navItemVariants}
-          initial='hidden'
-          visible='animate'
-          className={classes.navItem}
-        >
-          How it Works
-        </Typography>
-        <Typography
-          component={motion.h6}
-          variants={navItemVariants}
-          initial='hidden'
-          visible='animate'
-          className={classes.navItem}
-        >
-          Pricing
-        </Typography>
+        {navLinks.map((linkName, idx) => (
+          <Typography
+            key={idx}
+            component={motion.h6}
+            variants={navItemVariants}
+            initial='hidden'
+            visible='animate'
+            className={classes.navItem}
+          >
+            {linkName}
+          </Typography>
+        ))}
       </motion.div>
     </nav>
   );
