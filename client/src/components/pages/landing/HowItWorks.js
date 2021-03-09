@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 // theme: https://material-ui.com/styles/api/
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';

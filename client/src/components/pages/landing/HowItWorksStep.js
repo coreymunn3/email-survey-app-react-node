@@ -71,9 +71,9 @@ const HowItWorksStep = ({ step, direction }) => {
 
   // variants for animation
   const createStepVariants = (direction) => {
-    const xStartPost = direction === 'right' ? 50 : -50;
+    const xStartPos = direction === 'right' ? 50 : -50;
     return {
-      hidden: { opacity: 0, x: xStartPost },
+      hidden: { opacity: 0, x: xStartPos },
       visible: {
         opacity: 1,
         x: 0,

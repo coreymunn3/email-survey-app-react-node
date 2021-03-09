@@ -1,13 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
-import {
-  Paper,
-  Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-} from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import TableItem from './TableItem';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -40,18 +36,34 @@ const useStyles = makeStyles((theme) =>
         width: '100%',
       },
     },
-    callOut: {
-      padding: '1rem 0',
-      backgroundColor: '#3f51b5',
-      borderBottomRightRadius: '3px',
-      borderBottomLeftRadius: '3px',
-      color: 'white',
-    },
   })
 );
 
+const pricingTableVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      when: 'beforeChildren',
+      staggerChildren: '0.25',
+    },
+  },
+};
+
 const PricingTable = ({ pricingOptions }) => {
   const classes = useStyles();
+  const controls = useAnimation();
+  const { ref, inView } = useInView();
+  useEffect(() => {
+    if (inView) {
+      controls.start('visible');
+    }
+    if (!inView) {
+      controls.start('hidden');
+    }
+  }, [controls, inView]);
   return (
     <section className={classes.root}>
       <Typography variant='h6' gutterBottom align='center'>
@@ -60,30 +72,17 @@ const PricingTable = ({ pricingOptions }) => {
       <Typography variant='body2' align='center'>
         No Matter Who You Are, We Got You Covered
       </Typography>
-      <div className={classes.pricingTable}>
-        {pricingOptions.map(({ title, description, benefitsTable }, idx) => (
-          <Paper key={idx} className={classes.pricingBlock}>
-            <Typography variant='h4' gutterBottom align='center'>
-              {title}
-            </Typography>
-            <Table>
-              <TableBody>
-                {Object.keys(benefitsTable).map((key, idx) => (
-                  <TableRow key={idx}>
-                    <TableCell align='center'>{key}</TableCell>
-                    <TableCell align='center'>{benefitsTable[key]}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-            <div className={classes.callOut}>
-              <Typography variant='h6' align='center'>
-                {description}
-              </Typography>
-            </div>
-          </Paper>
+      <motion.div
+        className={classes.pricingTable}
+        variants={pricingTableVariants}
+        ref={ref}
+        initial='hidden'
+        animate={controls}
+      >
+        {pricingOptions.map((option, idx) => (
+          <TableItem option={option} key={idx} />
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };

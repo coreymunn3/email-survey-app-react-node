@@ -67,8 +67,8 @@ const buttonVariants = {
     opacity: 1,
     scale: 1.4,
     transition: {
-      delay: 1.5,
-      duration: 1.5,
+      delay: 1,
+      duration: 1,
     },
   },
 };
