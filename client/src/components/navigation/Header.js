@@ -9,6 +9,7 @@ import {
   Menu,
   MenuItem,
   Badge,
+  Tooltip,
 } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -21,6 +22,7 @@ import { useSelector } from 'react-redux';
 const Header = () => {
   const user = useSelector((state) => state.auth);
   const [anchor, setAnchor] = useState(null);
+  const [tooltipOpen, setTooltipOpen] = useState(false);
 
   const handleClick = (e) => {
     setAnchor(e.target);
@@ -43,11 +45,18 @@ const Header = () => {
         return (
           <Fragment>
             <CheckoutButton />
-            <IconButton aria-label='account balance'>
-              <Badge badgeContent={user.credits} color='secondary'>
-                <AccountBalanceIcon style={{ fill: 'white' }} />
-              </Badge>
-            </IconButton>
+            <Tooltip
+              title='Your Balance'
+              open={tooltipOpen}
+              onClick={() => setTooltipOpen(!tooltipOpen)}
+            >
+              <IconButton aria-label='account balance'>
+                <Badge badgeContent={user.credits} color='secondary'>
+                  <AccountBalanceIcon style={{ fill: 'white' }} />
+                </Badge>
+              </IconButton>
+            </Tooltip>
+
             <IconButton
               aria-label='user profile'
               aria-controls='menu-appbar'
@@ -96,7 +105,7 @@ const Header = () => {
           <HomeIcon />
         </IconButton>
         <Typography variant='h6' style={{ flexGrow: 1 }}>
-          Email Surveys
+          Surveys
         </Typography>
         {renderContent()}
       </Toolbar>

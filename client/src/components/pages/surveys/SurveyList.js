@@ -1,12 +1,14 @@
 import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, CircularProgress } from '@material-ui/core';
+import { Grid, CircularProgress, Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import SurveyListItem from './SurveyListItem';
 
 const useStyles = makeStyles({
   root: {
     width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
   },
   fullScreenProgress: {
     width: '100%',
@@ -15,11 +17,18 @@ const useStyles = makeStyles({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  noContent: {
+    textAlign: 'center',
+    padding: '0.5rem 1rem',
+    background: '#f4f4f4',
+    borderRadius: '5px',
+  },
 });
 
 const SurveyList = () => {
   const classes = useStyles();
   const { surveys, loading } = useSelector((state) => state.surveys);
+  console.log(surveys.length);
   return (
     <Fragment>
       {loading ? (
@@ -28,9 +37,17 @@ const SurveyList = () => {
         </div>
       ) : (
         <Grid container spacing={2} className={classes.root}>
-          {surveys.reverse().map((survey, idx) => (
-            <SurveyListItem survey={survey} key={idx} />
-          ))}
+          {surveys.length === 0 ? (
+            <Typography className={classes.noContent}>
+              You Don't Have Any Surveys Yet.
+            </Typography>
+          ) : (
+            surveys
+              .reverse()
+              .map((survey, idx) => (
+                <SurveyListItem survey={survey} key={idx} />
+              ))
+          )}
         </Grid>
       )}
     </Fragment>
