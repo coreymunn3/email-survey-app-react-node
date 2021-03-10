@@ -6,7 +6,7 @@ const userSchema = mongoose.Schema({
   emailAddress: String,
   credits: {
     type: Number,
-    default: 0,
+    default: 1,
   },
 });
 
