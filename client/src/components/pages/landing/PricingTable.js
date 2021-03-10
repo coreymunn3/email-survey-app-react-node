@@ -65,7 +65,7 @@ const PricingTable = ({ pricingOptions }) => {
     }
   }, [controls, inView]);
   return (
-    <section className={classes.root}>
+    <section id='pricing' className={classes.root}>
       <Typography variant='h6' gutterBottom align='center'>
         Pricing
       </Typography>

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
 import { motion } from 'framer-motion';
+// smooth scrolling as described in:
+// https://www.digitalocean.com/community/tutorials/how-to-implement-smooth-scrolling-in-react
+import { Link, animateScroll as scroll } from 'react-scroll';
 
 const useStyles = makeStyles({
   navbarTransparent: {
@@ -39,6 +42,10 @@ const useStyles = makeStyles({
       backgroundColor: 'rgba(0,0,0,0.15)',
     },
   },
+  navItemActive: {
+    cursor: 'pointer',
+    backgroundColor: 'rgba(0,0,0,0.15)',
+  },
 });
 
 const navVariants = {
@@ -68,9 +75,9 @@ const navItemVariants = {
 
 const StickyNav = () => {
   const classes = useStyles();
-  // find scroll position
+  // Dynamicall find page scroll position to facilitate
+  // the navbar background color change
   const [scrollPos, setScrollPos] = useState(0);
-  // set desired transition position
   const transitionAt = 50;
   const handleScroll = () => {
     setScrollPos(window.pageYOffset);
@@ -82,7 +89,12 @@ const StickyNav = () => {
     };
   }, []);
 
-  const navLinks = ['Home', 'About', 'How To', 'Pricing', 'Contact'];
+  const navLinks = [
+    { name: 'Home', sectionId: 'hero' },
+    { name: 'Benefits', sectionId: 'benefits' },
+    { name: 'How To', sectionId: 'how-it-works' },
+    { name: 'Pricing', sectionId: 'pricing' },
+  ];
   return (
     <nav
       aria-roledescription='navigation'
@@ -98,17 +110,22 @@ const StickyNav = () => {
         animate='visible'
         className={classes.navGroup}
       >
-        {navLinks.map((linkName, idx) => (
-          <Typography
+        {navLinks.map((link, idx) => (
+          <Link
+            to={link.sectionId}
+            activeClass={classes.navItemActive}
+            spy={true}
+            smooth={true}
+            duration={500}
             key={idx}
-            component={motion.h6}
             variants={navItemVariants}
             initial='hidden'
             visible='animate'
-            className={classes.navItem}
           >
-            {linkName}
-          </Typography>
+            <Typography variant='h6' className={classes.navItem}>
+              {link.name}
+            </Typography>
+          </Link>
         ))}
       </motion.div>
     </nav>

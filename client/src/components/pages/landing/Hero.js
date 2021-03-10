@@ -76,7 +76,7 @@ const buttonVariants = {
 const Hero = () => {
   const classes = useStyles();
   return (
-    <section className={classes.hero}>
+    <section id='hero' className={classes.hero}>
       <div maxwidth='xs' className={classes.overlay}>
         <Container
           component={motion.div}

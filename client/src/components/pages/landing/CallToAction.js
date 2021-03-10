@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
   title: {
     textAlign: 'center',
-    padding: '3rem',
+    padding: '1rem',
   },
   buttonSpacing: {
     padding: '2rem',
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 const CallToAction = () => {
   const classes = useStyles();
   return (
-    <section className={classes.primaryBg}>
+    <section id='call-to-action' className={classes.primaryBg}>
       <div className={classes.container}>
         <Typography className={classes.title} variant='h4' gutterBottom>
           So What Are You Waiting For?

@@ -54,7 +54,7 @@ const Benefits = ({ benefits }) => {
     }
   }, [controls, inView]);
   return (
-    <section className={classes.root}>
+    <section id='benefits' className={classes.root}>
       <Grid container className={classes.benefitsContainer}>
         {benefits.map((benefit, idx) => (
           <Grid key={idx} item sm={12} md={3}>

@@ -26,7 +26,7 @@ const HowItWorks = ({ howItWorks }) => {
   const classes = useStyles();
 
   return (
-    <section className={classes.primaryBg}>
+    <section id='how-it-works' className={classes.primaryBg}>
       <div className={classes.container}>
         <div className={classes.title}>
           <Typography variant='h6'>
