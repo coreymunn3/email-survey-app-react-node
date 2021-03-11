@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Container,
@@ -22,6 +22,8 @@ import {
 } from 'recharts';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrentSurvey } from '../../../actions/surveyActions';
+import { motion } from 'framer-motion';
+import containerVariants from '../pageTransitions';
 
 const useStyles = makeStyles({
   spacing: {
@@ -57,7 +59,13 @@ const SurveyDetail = ({
   ];
 
   return (
-    <Container>
+    <Container
+      component={motion.div}
+      variants={containerVariants}
+      initial='hidden'
+      animate='visible'
+      exit='exit'
+    >
       {loading ? (
         <div className={classes.fullScreenProgress}>
           <CircularProgress size={100} />

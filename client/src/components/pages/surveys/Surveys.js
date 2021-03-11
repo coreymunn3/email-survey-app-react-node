@@ -12,6 +12,8 @@ import AddIcon from '@material-ui/icons/Add';
 import SurveyList from './SurveyList';
 import { useDispatch } from 'react-redux';
 import { fetchSurveys } from '../../../actions/surveyActions';
+import { motion } from 'framer-motion';
+import containerVariants from '../pageTransitions';
 
 // styles from: https://stackoverflow.com/questions/35828991/make-material-ui-reactjs-floatingactionbutton-float
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +39,13 @@ const Surveys = () => {
   }, []);
 
   return (
-    <Container>
+    <Container
+      component={motion.div}
+      variants={containerVariants}
+      initial='hidden'
+      animate='visible'
+      exit='exit'
+    >
       <div className={classes.boxSpacing}>
         <Typography variant='h4' gutterBottom>
           Your Surveys

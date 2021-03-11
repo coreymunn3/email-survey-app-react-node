@@ -28,7 +28,6 @@ const useStyles = makeStyles({
 const SurveyList = () => {
   const classes = useStyles();
   const { surveys, loading } = useSelector((state) => state.surveys);
-  console.log(surveys.length);
   return (
     <Fragment>
       {loading ? (
@@ -42,11 +41,9 @@ const SurveyList = () => {
               You Don't Have Any Surveys Yet.
             </Typography>
           ) : (
-            surveys
-              .reverse()
-              .map((survey, idx) => (
-                <SurveyListItem survey={survey} key={idx} />
-              ))
+            surveys.map((survey, idx) => (
+              <SurveyListItem survey={survey} key={idx} />
+            ))
           )}
         </Grid>
       )}

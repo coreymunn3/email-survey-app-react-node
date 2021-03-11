@@ -1,19 +1,19 @@
-import React, { useEffect, Fragment } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Route, Switch, useLocation } from 'react-router-dom';
 // state
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { fetchUser } from './actions/authActions';
+import { AnimatePresence } from 'framer-motion';
 // components
-import Header from './components/navigation/Header';
 import Landing from './components/pages/landing/Landing';
 import Surveys from './components/pages/surveys/Surveys';
 import SurveyForm from './components/pages/surveyForm/SurveyForm';
-import SurveyDetail from './components/pages/surveys/SurveyDetail';
+import SurveyDetail from './components/pages/surveyDetail/SurveyDetail';
 import PrivateRoute from './components/navigation/PrivateRoute';
 
 const App = () => {
+  const location = useLocation();
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
   // get logged in user
   useEffect(() => {
     dispatch(fetchUser());
@@ -21,17 +21,14 @@ const App = () => {
 
   return (
     <div>
-      <Router>
-        <Switch>
+      <AnimatePresence exitBeforeEnter>
+        <Switch location={location} key={location.key}>
           <Route exact path='/' component={Landing} />
-          <Fragment>
-            <Header />
-            <PrivateRoute exact path='/surveys' component={Surveys} />
-            <PrivateRoute path='/surveys/survey/:id' component={SurveyDetail} />
-            <PrivateRoute exact path='/surveys/new' component={SurveyForm} />
-          </Fragment>
+          <PrivateRoute exact path='/surveys' component={Surveys} />
+          <PrivateRoute path='/surveys/survey/:id' component={SurveyDetail} />
+          <PrivateRoute exact path='/surveys/new' component={SurveyForm} />
         </Switch>
-      </Router>
+      </AnimatePresence>
     </div>
   );
 };

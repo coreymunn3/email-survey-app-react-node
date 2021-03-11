@@ -15,6 +15,8 @@ import Confirmation from './Confirmation';
 import SurveyFormSteps from './SurveyFormSteps';
 import { useDispatch } from 'react-redux';
 import { createSurvey } from '../../../actions/surveyActions';
+import { motion } from 'framer-motion';
+import containerVariants from '../pageTransitions';
 // util function
 import validateForm from '../../../utils/validateForm';
 
@@ -61,7 +63,14 @@ const SurveyForm = () => {
   };
 
   return (
-    <Container className={classes.container}>
+    <Container
+      className={classes.container}
+      component={motion.div}
+      variants={containerVariants}
+      initial='hidden'
+      animate='visible'
+      exit='exit'
+    >
       <Paper>
         <Typography
           variant='h4'

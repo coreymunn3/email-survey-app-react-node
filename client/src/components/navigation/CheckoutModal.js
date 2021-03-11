@@ -15,6 +15,7 @@ import { addCredits } from '../../actions/authActions';
 // stripe imports
 import axios from 'axios';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { motion } from 'framer-motion';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -102,8 +103,27 @@ const CheckoutModal = ({ modalIsOpen, handleClose }) => {
     }
   };
 
+  const modalVariants = {
+    hidden: {
+      y: -40,
+      opacity: 0,
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
   const modalBody = (
-    <div className={classes.paper}>
+    <motion.div
+      className={classes.paper}
+      variants={modalVariants}
+      initial='hidden'
+      animate='visible'
+    >
       <Typography variant='h5' align='center' color='primary' gutterBottom>
         Add Credits
       </Typography>
@@ -159,7 +179,7 @@ const CheckoutModal = ({ modalIsOpen, handleClose }) => {
           )}
         </Grid>
       </form>
-    </div>
+    </motion.div>
   );
 
   return (

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
@@ -25,7 +26,9 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 ReactDOM.render(
   <Provider store={store}>
     <Elements stripe={stripePromise}>
-      <App />
+      <Router>
+        <App />
+      </Router>
     </Elements>
   </Provider>,
   document.getElementById('root')
