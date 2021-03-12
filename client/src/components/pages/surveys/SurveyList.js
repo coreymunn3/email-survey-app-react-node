@@ -9,6 +9,7 @@ const useStyles = makeStyles({
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
+    margin: '0',
   },
   fullScreenProgress: {
     width: '100%',
@@ -27,7 +28,22 @@ const useStyles = makeStyles({
 
 const SurveyList = () => {
   const classes = useStyles();
-  const { surveys, loading } = useSelector((state) => state.surveys);
+  const { surveys, filteredSurveys, loading } = useSelector(
+    (state) => state.surveys
+  );
+
+  const renderSurveys = () => {
+    if (filteredSurveys) {
+      return filteredSurveys.map((survey, idx) => (
+        <SurveyListItem survey={survey} key={idx} />
+      ));
+    } else {
+      return surveys.map((survey, idx) => (
+        <SurveyListItem survey={survey} key={idx} />
+      ));
+    }
+  };
+
   return (
     <Fragment>
       {loading ? (
@@ -41,9 +57,7 @@ const SurveyList = () => {
               You Don't Have Any Surveys Yet.
             </Typography>
           ) : (
-            surveys.map((survey, idx) => (
-              <SurveyListItem survey={survey} key={idx} />
-            ))
+            renderSurveys()
           )}
         </Grid>
       )}

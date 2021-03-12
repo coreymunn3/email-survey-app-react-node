@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import SurveyList from './SurveyList';
+import SearchBar from './SearchBar';
 import { useDispatch } from 'react-redux';
 import { fetchSurveys } from '../../../actions/surveyActions';
 import { motion } from 'framer-motion';
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     padding: '2rem 0',
   },
   clearBottom: {
-    marginBottom: '2rem',
+    marginBottom: '1rem',
   },
 }));
 
@@ -50,7 +51,7 @@ const Surveys = () => {
         <Typography variant='h4' gutterBottom>
           Your Surveys
         </Typography>
-        <Divider className={classes.clearBottom} />
+        <SearchBar />
         <SurveyList />
         <Tooltip title='New Survey' aria-label='add'>
           <Fab

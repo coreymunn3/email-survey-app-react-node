@@ -6,6 +6,8 @@ import {
   FETCH_CURRENT_SURVEY,
   SURVEY_LOADING,
   SURVEY_ERROR,
+  FILTER_SURVEYS,
+  CLEAR_FILTER,
 } from './types';
 
 export const setLoading = () => (dispatch) => {
@@ -60,4 +62,17 @@ export const fetchCurrentSurvey = (id) => async (dispatch) => {
   } catch (error) {
     dispatch(setError(error));
   }
+};
+
+export const filterSurveys = (query) => (dispatch) => {
+  dispatch({
+    type: FILTER_SURVEYS,
+    payload: query,
+  });
+};
+
+export const clearFilter = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_FILTER,
+  });
 };

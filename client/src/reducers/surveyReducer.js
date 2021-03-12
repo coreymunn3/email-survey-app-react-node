@@ -4,10 +4,13 @@ import {
   FETCH_CURRENT_SURVEY,
   SURVEY_LOADING,
   SURVEY_ERROR,
+  FILTER_SURVEYS,
+  CLEAR_FILTER,
 } from '../actions/types';
 
 const initialState = {
   surveys: [],
+  filteredSurveys: null,
   current: {
     yes: 0,
     no: 0,
@@ -50,6 +53,19 @@ export default (state = initialState, action) => {
         ...state,
         current: action.payload,
         loading: false,
+      };
+    case FILTER_SURVEYS:
+      return {
+        ...state,
+        filteredSurveys: state.surveys.filter((survey) => {
+          const regex = new RegExp(`${action.payload}`, 'gi');
+          return survey.title.match(regex);
+        }),
+      };
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filteredSurveys: null,
       };
     default:
       return state;
