@@ -22,10 +22,14 @@ const Confirmation = () => {
     <Container className={classes.root}>
       {loading && <CircularProgress size={100} />}
       {success && (
-        <Fragment>
-          <Typography variant='h4'>Thank you for Using our Serivce</Typography>
-          <Typography variant='body1'>Your Email Has Been Sent!</Typography>
-        </Fragment>
+        <div>
+          <Typography variant='h4' align='center'>
+            Thank you for Using our Serivce
+          </Typography>
+          <Typography variant='body1' align='center'>
+            Your Email Has Been Sent!
+          </Typography>
+        </div>
       )}
       {failure && (
         <Fragment>

@@ -20,7 +20,7 @@ import { motion } from 'framer-motion';
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: '55%',
+    width: '75%',
     maxWidth: '500px',
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
@@ -77,6 +77,7 @@ const CheckoutModal = ({ modalIsOpen, handleClose }) => {
       if (paymentMethodReq.error) {
         setCheckoutError(paymentMethodReq.error.message);
         setProcessingTo(false);
+        return;
       }
 
       // confirm card payment
@@ -99,7 +100,7 @@ const CheckoutModal = ({ modalIsOpen, handleClose }) => {
         handleClose();
       }
     } catch (err) {
-      setCheckoutError(err.message);
+      setCheckoutError('Unable to Initiate Payment');
     }
   };
 

@@ -15,7 +15,7 @@ router.post('/payment_intent', requireLogin, async (req, res) => {
     });
     res.status(200).json({ clientSecret: intent.client_secret });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ error: 'Unable to create stripe client secret' });
   }
 });
 

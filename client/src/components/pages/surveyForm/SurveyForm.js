@@ -56,7 +56,7 @@ const SurveyForm = () => {
   const handleAdvanceStep = () => {
     if (isReview) {
       // submit form
-      console.log(formData);
+      // console.log(formData);
       dispatch(createSurvey(formData));
     }
     nextStep();
