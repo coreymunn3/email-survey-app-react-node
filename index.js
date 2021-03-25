@@ -1,14 +1,10 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const path = require('path');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const connectDB = require('./config/connectDb');
 const keys = require('./config/keys');
-// models
-const User = require('./models/Users');
-const Survey = require('./models/Survey');
 
 // connect to DB
 connectDB(keys.MONGO_URI);
