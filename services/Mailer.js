@@ -9,7 +9,7 @@ class Mailer extends helper.Mail {
   constructor({ subject, recipients }, template) {
     super();
 
-    this.from_email = new helper.Email('coreymunnrealestate@gmail.com');
+    this.from_email = new helper.Email('emailapp.management@gmail.com');
     this.subject = subject;
     this.body = new helper.Content('text/html', template);
     this.addContent(this.body);

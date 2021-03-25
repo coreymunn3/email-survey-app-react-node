@@ -56,6 +56,7 @@ router.get('/:surveyId/:choice', (req, res) => {
 });
 
 router.post('/webhooks', (req, res) => {
+  // console.log(req.body);
   // define path params from pathname
   const p = new Path('/api/surveys/:surveyId/:choice');
   // map over body of request to pull out meaningful survey data
