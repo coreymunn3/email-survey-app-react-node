@@ -21,7 +21,7 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(...middlewares))
 );
 // stripe setup
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
+const stripePromise = loadStripe(`${process.env.REACT_APP_STRIPE_KEY}`);
 
 ReactDOM.render(
   <Provider store={store}>
