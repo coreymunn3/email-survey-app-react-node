@@ -1,4 +1,5 @@
 import React from 'react';
+import { Fragment } from 'react';
 import { Container, Typography, CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
@@ -21,12 +22,17 @@ const Confirmation = () => {
     <Container className={classes.root}>
       {loading && <CircularProgress size={100} />}
       {success && (
-        <Typography variant='h4'>Thank you for Using our Serivce!</Typography>
+        <Fragment>
+          <Typography variant='h4'>Thank you for Using our Serivce</Typography>
+          <Typography variant='body1'>Your Email Has Been Sent!</Typography>
+        </Fragment>
       )}
       {failure && (
-        <Typography variant='h4' color='secondary'>
-          Request Failed, Please try again.
-        </Typography>
+        <Fragment>
+          <Typography variant='h4' color='secondary' align='center'>
+            {error}
+          </Typography>
+        </Fragment>
       )}
     </Container>
   );

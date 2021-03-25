@@ -31,8 +31,7 @@ export const createSurvey = (formData) => async (dispatch) => {
       payload: data,
     });
   } catch (error) {
-    console.log(error);
-    dispatch(setError(error));
+    dispatch(setError(error.response.data.error));
   }
   // get the new user now
   dispatch(fetchUser());
@@ -47,7 +46,7 @@ export const fetchSurveys = () => async (dispatch) => {
       payload: data,
     });
   } catch (error) {
-    dispatch(setError(error));
+    dispatch(setError(error.response.data.error));
   }
 };
 
@@ -60,7 +59,7 @@ export const fetchCurrentSurvey = (id) => async (dispatch) => {
       payload: data,
     });
   } catch (error) {
-    dispatch(setError(error));
+    dispatch(setError(error.response.data.error));
   }
 };
 

@@ -17,7 +17,7 @@ router.get('/', requireLogin, async (req, res) => {
     );
     res.status(200).json(userSurveys);
   } catch (error) {
-    res.status(404);
+    res.status(404).json({ error: 'Unable To Find Surveys for This User' });
   }
 });
 
@@ -45,7 +45,7 @@ router.post('/', requireLogin, requireCredits, async (req, res) => {
     // send back survey
     res.json(survey);
   } catch (error) {
-    res.status(422).json(error);
+    res.status(422).json({ error: 'Unable to Create Survey' });
   }
 });
 
