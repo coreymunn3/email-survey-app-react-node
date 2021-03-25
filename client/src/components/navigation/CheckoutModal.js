@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CheckoutModal = ({ modalIsOpen, handleClose }) => {
+const CheckoutModal = ({ modalIsOpen, handleClose, handleSnackbarOpen }) => {
   const classes = useStyles();
   const stripe = useStripe();
   const elements = useElements();
@@ -98,6 +98,7 @@ const CheckoutModal = ({ modalIsOpen, handleClose }) => {
         // end processing and close modal
         setProcessingTo(false);
         handleClose();
+        handleSnackbarOpen(true, 'Credits Have Been Added');
       }
     } catch (err) {
       setCheckoutError('Unable to Initiate Payment');
